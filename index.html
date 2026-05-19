@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+        <title>Tienda online</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container__card{
+			width: 1300px;
+			
+			margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 50px 0;
+        }
+
+        .container__producto{
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border: 0.1px solid rgb(191, 216, 214);
+            width: 300px;
+            height: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .container__producto img{
+            width: 100%;
+            height: auto;
+        }
+		#producto{
+			background-color: rgb(252, 252, 235);
+		}
+        #producto h2{
+            padding: 20px 250px;
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+            border-top: 1px solid aqua;  
+        }
+		
+        .card__title{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            position: absolute;
+            top: 30px;
+            left: 0px;
+            /*background-color: #3df3e1;*/
+            background-color: #11fadf;
+            color: rgb(24, 19, 19);
+            padding: 5px 8px;
+            border-radius: 0 0px 10px 0;
+        }/*
+        .btn:hover{
+            transform: scale(1.05);
+        }*/
+        .container__producto .btn{
+            display: block;   
+            width: 100px;  
+            margin-left: auto;     
+            margin-right: auto; 
+            padding: 10px 20px;
+            background-color: #11fadf;
+            border-radius: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .container__producto .btn:hover{
+			color: white;
+            background-color: #0f6ad2;
+		}
+		
+		
+        /*HEADER*/
+        .container__header{
+            background-color: rgb(3, 5, 9);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+        .container__header h1{
+            font-size: 14px;
+		    color: transparent;
+            padding: 20px 50px;
+		    background-image: url(logo/logo_1.png);
+		    background-repeat: no-repeat;
+		    background-position: 30px center;
+            background-size: contain;
+        }
+        .container__nav ul{
+            display: flex;
+            list-style: none;
+        }
+        .container__nav ul li a{
+            text-decoration: none;
+            padding: 20px 10px;
+            text-transform: uppercase;
+            color: #F2F2F2;
+            font-family: Helvetica, Segoe UI, Verdana;
+            font-size: 14px;
+        }
+        .container__nav ul li a:hover{
+			background-color: #045e50;
+			transition: 0.5s;
+		}
+        .container__banner{
+            width: 100%;
+            height: auto;
+            background-image: url(img/Imagen_05.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+
+        }
+        .container__banner img{
+            visibility: hidden;
+        }
+        .container__banner .container__btn{
+            position: absolute;
+            bottom: 200px;
+            left: 400px;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #11fadf;
+            border-radius: 5px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .container__categoria{
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 20px;
+            background-color: rgb(252, 252, 235);
+            padding: 30px 0px;
+        }
+        .container__categoria .card__categoria{
+            background-color: white;
+            padding: 0px 0px 15px 0px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border: 0.1px solid rgb(191, 216, 214);
+            width: 350px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card__categoria a{
+            text-decoration: none;
+            color: rgb(40, 54, 69);
+            font-weight: bold;
+            background-color: #11fadf;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+		.card__categoria a:hover{
+			color: white;
+            background-color: #0f6ad2;
+		}
+		
+        #categoria h2{
+            padding: 10px 0px 10px 250px;
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+            border-top: 1px solid aqua;  
+        }
+
+        /*Videos y Playlists*/
+        .multimedia{
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 50px;
+            background-color: rgb(3, 5, 9);
+            padding: 100px 0px;
+        }
+        .multimedia__box1{
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            width: 680px;
+            height: 380px;
+        }
+        .multimedia__box1 iframe{
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .multimedia__box1 h2, .multimedia__box2 h2{
+            /*text-align: center;*/
+            padding: 10px;
+            background-color: rgb(3, 5, 9);
+            color: rgb(246, 246, 246);
+            border-top: 1px solid aqua;
+        }
+        .multimedia__box2{
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            width: 380px;
+            height: 100%;          
+        }
+        .multimedia__box2 ol{
+            padding: 0px 20px 20px 20px;
+            background-color: rgb(60, 62, 62);
+        }
+        .multimedia__box2 ol li{
+            list-style: none;
+            color: white;
+            padding: 10px 5px 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid aqua;            
+        }
+        .multimedia__box2 ol li audio{
+            width: 150px;
+        }
+
+        .container__banner .container__btn{
+            left: 20%;
+            bottom: 150px;
+        }
+
+
+        .container__marcas{
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+        }
+        .container__marcas h2{
+            padding: 10px 0px 10px 250px;
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+        }
+        .container__marcas div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 100px 0px;
+            background-color: rgb(252, 252, 235);
+            margin: 0px 0px;
+        }
+        .container__marcas div img{
+            width: 200px;
+            height: auto;
+        }
+        
+
+        /*Suscribite*/
+        .container__suscribite{
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+            padding: 30px 0px;
+        }
+        .container__suscribite h2{
+            padding: 10px 0px 10px 250px;
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+        }
+        .container__suscribite .form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+            padding: 10px 0px;
+        }
+        .container__suscribite .form [type="text"]{
+			width: 600px;
+			padding: 10px 0px 10px 15px;
+			margin: 5px 0px;
+		}
+        .container__suscribite #submit{
+            width: 100px;
+            padding: 10px 20px;
+            background-color: #11fadf;
+            border-radius: 5px;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .container__suscribite .form input[type=text]:focus{
+			background-color: #e4f3ef;
+			color: black;
+		}
+        .container__suscribite .form .enviar:hover{
+			color: white;
+            background-color: #0f6ad2;
+            opacity: 0.9;
+		}
+		
+        /*Galeria*/
+        .container__galeria div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 0px 0px;
+        }
+        .container__galeria div a img{
+            width: 300px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .container__galeria div a img:hover{
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+        .container__galeria h2{
+            padding: 10px 0px 10px 250px;
+            background-color: rgb(3, 5, 9);
+            color: #F2F2F2;
+        }
+
+        /*Nosotros*/
+        .container__nosotros{
+            background-color: rgb(252, 252, 235);
+            color: #180808;
+            padding: 30px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            /*padding: 20px 0px;*/
+        }
+        .container__nosotros h2{
+            text-align: center;
+            color: #090202;
+        }
+        .container__nosotros .nosotros__card{
+            width: 500px;
+            height: auto;
+        }
+
+        /*Opiniones*/
+        .container__user{
+            background-color: rgb(252, 252, 235);
+            color: #F2F2F2;
+            padding: 100px 0px;
+        }
+        .container__user h2{
+            padding: 10px 0px 10px 250px;
+            /*background-color: rgb(3, 5, 9);*/
+            color: #090202;
+        }
+        .container__perfil{
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 20px;
+            padding: 20px 0px;
+        }
+        .container__perfil .card__perfil{
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border: 0.1px solid rgb(191, 216, 214);
+            width: 300px;
+            height: auto;
+            display: flex;
+            gap: 10px;
+        }
+        .container__perfil .card__perfil img{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        .container__perfil .card__perfil h3, span, p{
+            /*margin-top: 10px;*/
+            color: rgb(24, 19, 19);
+        }
+        .card__perfil .checked {
+            color: #ffcc00;
+        }
+        /*FOOTER */
+        footer{
+            background-color: rgb(3, 5, 9);
+            color: #363030;
+            padding: 30px 0px;
+            font-size: 14px;
+
+        }
+        .container-footer{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            
+        }
+        footer .container-footer div{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        footer .container-footer div h3{
+            color: #F2F2F2;
+        }
+        footer .container-footer div ul{
+            list-style: none;
+        }
+        footer .container-footer div ul li{
+            color: #F2F2F2;
+        }
+        footer .container-footer div ul li a{
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        footer .container-footer .container-lista{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+        }
+        footer .container-footer .container-lista li a{
+            text-decoration: none;
+            color: #F2F2F2;
+        }
+        footer .container-footer .container-lista li a i{
+            font-size: 30px;
+        }
+        footer .container-footer .container-lista li a:hover{
+            color: #11fadf;
+            transition: 0.5s;
+        }
+        footer .container-footer .container-condiciones{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        footer .container-footer .container-condiciones li a{
+            text-decoration: none;
+            color: #F2F2F2;
+            padding: 20px;
+        }
+        .container-footer h1 a{
+            font-size: 14px;
+            color: transparent;
+            padding: 20px 50px;
+            background-image: url(logo/logo_1.png);
+            background-repeat: no-repeat;
+            background-position: 30px center;
+            background-size: contain;
+
+        }
+        footer .container-footer div ul li a:hover{
+            color: #11fadf;
+            transition: 0.5s;
+        }
+        footer p{
+            color: #F2F2F2;
+            text-align: center;
+            margin: 50px 0px 0px 0px;
+        }
+        
+        .container__contacto{
+            background-color: rgb(3, 5, 9);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 10px;
+
+        }
+        .container__contacto h2{
+            color: #F2F2F2;
+        }
+        
+        .card__contacto{
+            background-color: rgb(95, 56, 8);
+            padding: 10px 0px 15px 25px;
+            width: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(49, 56, 56);
+            border-radius: 5px;
+        }
+        .card__contacto input, textarea{
+            padding: 10px 15px;
+            margin: 5px 0px;
+            width: 80%;
+            margin: auto;
+            border-radius: 5px;
+            resize: none;
+        }
+        .card__contacto input[type="submit"]{
+            width: 150px;
+            background-color: #11fadf;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .card__contacto input[type="submit"]:hover{
+            color: white;
+            background-color: #0f6ad2;
+            opacity: 0.9;
+        }
+        .card__contacto label, .card__contacto p{
+            color: #F2F2F2;
+            font-weight: bold;
+            margin: 0px 0px 0px 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header id="Top">
+        <div class="container__header">
+            <h1>Logo</h1>
+            <nav class="container__nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="#categoria">Categoria</a></li>
+                    <li><a href="#producto">Productos</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container__banner">
+            <img src="img/banner.png" alt="imagen de un dj" title="imagen de un dj">
+            <a href="#" class="container__btn">Más detalles</a>
+        </div>
+    </header>
+    <main>
+        <section id="categoria">
+        <h2>Categoria</h2>
+        <div class="container__categoria">  
+            <div class="card__categoria">
+                <img src="img/1auricular.png" alt="imagen de auricular" 
+                title="imagen de auricular" width="250" height="200">
+
+                <a href="#producto">Auriculares</a>
+            </div>
+            <div class="card__categoria">
+                <img src="img/2consola.png" alt="imagen de consola" 
+                title="imagen de consola" width="250" height="200">
+                <a href="#producto">Consolas</a>
+            </div>
+            <div class="card__categoria">
+                <img src="img/3sonido.png" alt="imagen de sonido" 
+                title="imagen de sonido" width="250" height="200">
+                <a href="#producto">Sonidos</a>
+            </div>
+        </div>
+        </section>
+        <section>
+        <div class="multimedia">
+            <div class="multimedia__box1">
+                <h2>Set Dj EZ performance</h2>
+                <!--<video width="500" controls>
+                    <source src="video/movie.mp4" type="video/mp4">
+                    <source src="video/movie.ogg" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video> -->
+                <iframe width="600" height="315" 
+                    src="https://www.youtube.com/embed/eW02zBn_xZw?"></iframe>
+            </div>
+            <div class="multimedia__box2">
+                <h2>Top 5 más populares</h2>
+                <ol>
+                    <li>
+                        Dua Lipa - Physical
+                        <audio controls>
+                            <source src="audio/Dua_Lipa_Physical.mp3" type="audio/mp3">
+                        </audio>
+                    </li>
+                    <li>
+                        J Balvin - Ritmo    
+                        <audio controls>
+                            <source src="audio/JBalvin_Ritmo.mp3" type="audio/mp3">
+                        </audio>
+                    </li>
+                    <li>
+                        Luis Fonsi - Despacito
+                        <audio controls>
+                            <source src="audio/Luis_Fonsi_Despacito.mp3" type="audio/mp3">
+                        </audio>
+                    </li>
+                    <li>
+                        Shakira - La Bicicleta
+                        <audio controls>
+                            <source src="audio/Shakira_La_Bicicleta.mp3" type="audio/mp3">
+                        </audio>
+                    </li>
+                    <li class="border-none">
+                        The Weeknd - Save Your
+                        <audio controls>
+                            <source src="audio/The_Weeknd_Save_Your_Tears.mp3" type="audio/mp3">
+                        </audio>
+                    </li>
+                </ol>
+            </div>
+        </div>    
+        </section>
+        <section id="producto">
+            <h2>Producto</h2>
+            <div class="container__card">
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_01.jpg" alt="imagen de auricular" 
+                    title="imagen de auricular" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Auriculares HDJ-CUE1 DJ</h3>
+                    <div class="parrafo">
+                        <p>Elige los HDJ-CUE1 para disfrutar de un look profesional, un sonido rico, 
+                        un diseño compacto y flexible, y un acabado de alta calidad.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_02.jpg" alt="imagen de auricular" 
+                    title="imagen de auricular" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Auricular OneOdio DJ A71 Fusion</h3>
+                    <div class="parrafo">
+                        <p>Elige el auricular OneOdio DJ A71 Fusion para disfrutar de un sonido
+                            de alta calidad y un diseño ergonómico.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_03.jpg" alt="imagen controlador traktor" 
+                    title="imagen controlador traktor" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Controlador Traktor Control S4</h3>
+                    <div class="parrafo">
+                        <p>Elige el controlador Traktor Control S4 para disfrutar de una experiencia de DJ completa y profesional.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_04.png" alt="imagen de dj control" 
+                    title="imagen de dj control" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Controlador Dj control impulse 500</h3>
+                    <div class="parrafo">
+                        <p>Elige el controlador Dj control impulse 500 para disfrutar de una experiencia de DJ completa y profesional.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+                
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_05.jpg" alt="imagen de usb" 
+                    title="imagen de usb" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Pendrive Dj Alphatheta 1tb</h3>
+                    <div class="parrafo">
+                        <p>Elige el pendrive Dj Alphatheta 1tb para almacenar y transportar tu música favorita con facilidad.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_06.jpg" alt="imagen de usb"
+                    title="imagen de usb" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Pendrive Dj Twist PD587 8GB 2.0</h3>
+                    <div class="parrafo">
+                        <p> es una unidad de almacenamiento portátil básica diseñada para el uso diario,
+                            transferencia de documentos y archivos multimedia</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_07.jpg" alt="imagen de parlante" 
+                    title="imagen de parlante" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Parlante JBL LSR 305P MKII</h3>
+                    <div class="parrafo">
+                        <p>El JBL 305P MkII es un monitor de estudio activo de campo cercano de 5" (serie LSR) 
+                            reconocido por su excelente relación calidad-precio y precisión en mezclas</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+
+                <div class="container__producto">
+                    <img src="img/imagenes/foto_08.jpg" alt="imagen de parlante" 
+                    title="imagen de parlante" width="350">
+                    <div class="card__title">
+                        <i class="fa-solid fa-truck-moving fa-xl"></i>
+                        <span>Envio gratis</span>
+                    </div>
+                    <h3>Parlante M-AUDIO BX4 BT-120W</h3>
+                    <div class="parrafo">
+                        <p>altavoces activos de 4.5 pulgadas con 120W de potencia pico, ideales para producciones,
+                            djs o consumo multimedia.</p>
+                    </div>
+                    <a href="#" class="btn">Ver más</a>
+                </div>
+            </div>
+        </section>
+        <section class="container__marcas">
+            <h2>Marcas que trabajamos</h2>
+            <div >
+                <img src="logo/Pioneer.png" alt="logo de pioneer" title="logo de pioneer">
+                <img src="logo/Rekordbox.png" alt="logo de rekordbox" title="logo de rekordbox">
+                <img src="logo/seratodj.png" alt="logo de serato" title="logo de serato">
+                <img src="logo/Traktor.png" alt="logo de traktor" title="logo de traktor">
+                <img src="logo/virtualdj.png" alt="logo de virtualdj" title="logo de virtualdj">
+            </div>
+        </section>
+        <section class="container__suscribite">
+            <h2>Suscribite</h2>
+            <form class="form" action="https://formspree.io/f/xzdknjvz" method="post">
+                <label for="fname">Registrate a nuestro newsletter y enterate de nuestras novedades y
+                    ofertas.</label><br>
+                <input type="text" placeholder="@hotmail.com" required id="fname" name="fname"><br>
+                <input class="enviar" id="submit" type="submit" value="Enviar">
+            </form>
+        </section>
+        <section id="perfil" class="container__user">
+			<h2>Opiniones de usuarios</h2>
+			<div class="container__perfil">
+				<div class="card__perfil">
+					<img src="perfil/perfil01.png" alt="Avatar"> 
+					<div>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
+						<h3>Jessi Cantilo</h3> 
+						<span>Dj Producer</span>
+                        <p>Mis equipos los compro en este local. Llevo un mes usándolo en
+                            bodas y la integración con rekordbox agilizó mis preparaciones.
+                        </p>
+					</div>
+				</div>
+                <div class="card__perfil">
+                    <img src="perfil/perfil02.png" alt="Avatar">
+                    <div>
+                        <span class="fa fa-star checked" ></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <h3>Marcelo Prediger</h3> 
+                        <span>Dj de Eventos Sociales</span>
+                        <p>A pesar de su potencia, ocupa poco espacio en mi cabina
+                            y es fácil de transportar.
+                        </p>
+                    </div>
+                </div>
+                <div class="card__perfil">
+                    <img src="perfil/perfil03.png" alt="Avatar">
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <h3>Robert Rios</h3> 
+                        <span>Dj Urbano</span>
+                        <p>He estado usando los equipos de esta empresa durante un año 
+                            y la calidad es excepcional.
+                        </p>
+                    </div>
+                </div>
+                <div class="card__perfil">
+                    <img src="perfil/perfil04.png" alt="Avatar">
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <h3>Dj Javi Quevedo</h3> 
+                        <span>Dj Bares y Pub</span>
+                        <p>Los equipos que compré en esta tienda han sido una gran inversión para mi carrera como DJ.
+                        </p>
+                    </div>
+                </div>
+			</div>		
+		</section>
+        <section id="contacto">
+            <div class="container__contacto">
+                <div>
+                <h2>Donde estamos</h2>
+                    <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.102201971425!2d-58.391585124272545!3d-34.60157705738505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccac0d25a3e95%3A0xe6c71a9a78b56207!2sTucum%C3%A1n%201561%2C%20C1050%20AAE%2C%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1777901090606!5m2!1ses-419!2sar"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div>
+                    <h2>Descubre tu proximo equipo!!!</h2>
+                    <form class="card__contacto" action="https://formspree.io/f/xzdknjvz" method="post" class="form">
+						<label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" placeholder="Nombre" required />
+                        
+						<label for="lastname">Apellido</label>
+                        <input type="text" placeholder="Apellido" id="lastname" name="lastname" required />
+                        
+						<label for="email">Correo electronico </label>
+                        <input type="text" placeholder="Ingrese su email" id="email" name="email" required>
+							
+                        <p>Escriba su mensaje</p>
+                        <textarea name="Texto" cols="30" rows="8" placeholder="Escriba su mensaje"></textarea>
+                        
+						<input type="submit" value="Enviar mensaje" />
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id="nosotros" class="container__nosotros">
+            <div class="nosotros__card">
+                <h2>Nosotros</h2>
+                <p class="parrafo">Somos una empresa dedicada a la venta de equipos de sonido para djs, con mas de 20 años
+                    en el mercado, brindamos asesoramiento personalizado a nuestros clientes para que puedan encontrar el
+                    equipo que mejor se adapte a sus necesidades y presupuesto. <br> Contamos con una amplia variedad de
+                    productos de las mejores marcas del mercado, desde auriculares hasta consolas de sonido profesionales. <br>
+                    Nuestro objetivo es brindar un servicio de calidad y satisfacción a nuestros clientes, por eso nos
+                    esforzamos por ofrecer productos de alta calidad y un excelente servicio al cliente.</p>
+            </div>
+            <div class="nosotros__card">
+                <img src="img/fondo.jpg" alt="Imagen de la empresa" title="Imagen de la empresa" width="660" height="440">
+            </div>
+        </section>
+
+        <section id="galeria" class="container__galeria">
+            <h2>Galeria</h2>
+            <div>
+                <a href="img/imagen_01.jpg" class="glightbox"><img src="img/imagen_01.jpg" alt="Imagen de djs"
+                        title="Imagen de djs " /></a>
+                <a href="img/imagen_02.jpg" class="glightbox"><img src="img/imagen_02.jpg" alt="Imagen de djs"
+                        title="Imagen de djs " width="300" /></a>
+                <a href="img/imagen_03.jpg" class="glightbox"><img src="img/imagen_03.jpg" alt="Imagen de djs"
+                        title="Imagen de djs " width="300" /></a>
+                <a href="img/imagen_04.jpg" class="glightbox"><img src="img/imagen_04.jpg" alt="Imagen de djs"
+                        title="Imagen de djs " width="300" /></a>
+            </div>
+        </section>
+        <section>
+            <a href="#top"><i class="fa-solid fa-circle-arrow-up"></i></a>
+        </section>
+    </main>
+    <footer>
+        <div class="container-footer">
+            <h1><a href="#">Logo App</a></h1>
+            <div>
+                <ul class="container-condiciones">
+                    <li><a href="#">Terminos y condiciones</a></li>
+                    <li><a href="#">Politica de privacidad</a></li>
+                    <li><a href="#">Copyright</a></li>
+                    <li><a href="#">Preguntas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Horario de atencion</h3>
+                <ul>
+                    <li>Lunes a viernes de 09 a 19hs</li>
+                    <li>Sabados, Domingos y feriados 10 a 17hs</li>
+                </ul>
+            </div>
+            <div>
+                <ul class="container-lista">
+                    <li><a href="http://www.facebook.com" target="_blank"><i
+                                class="fa-brands fa-square-facebook"></i></a></li>
+                    <li><a href="http://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    </li>
+                    <li><a href="http://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="texto-footer derecho">2026 - Todos los derechos reservados</p>
+    </footer>
+</body>
+
+</html>
